@@ -7,19 +7,102 @@
 //
 
 import UIKit
+import ProjectOxfordFace
+import Foundation
 
-class ViewController: UIViewController {
+//icons 
+//panda  Creative Stall, Lucid Formation
 
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    
+    @IBOutlet weak var topImg: UIImageView!
+    @IBOutlet weak var bottomImg: UIImageView!
+    
+    var hasChoosenTop: Bool!
+    var hasChoosenBottom: Bool!
+    var imgSelected: String!
+    
+    let imagePicker = UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        hasChoosenTop = false
+        hasChoosenBottom = false
+        
+        imagePicker.delegate = self
+        let topTap = UITapGestureRecognizer(target: self, action: #selector(loadPicker(_:)))
+        topTap.numberOfTapsRequired = 1
+        
+        let bottomTap = UITapGestureRecognizer(target: self, action: #selector(loadPicker(_:)))
+        bottomTap.numberOfTapsRequired = 1
+        
+        topImg.addGestureRecognizer(topTap)
+        topImg.tag = 0
+        bottomImg.addGestureRecognizer(bottomTap)
+        bottomImg.tag = 1
+        imgSelected = "none"
+        
     }
+    
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func battleBtn(sender: UIButton){
+        print("1a")
+        if !hasChoosenTop || !hasChoosenBottom{
+            print("2a")
+            showErrorAlert()
+        } else{
+            print("3a")
+            if let firstImg = topImg.image, let firstImgData = UIImageJPEGRepresentation(firstImg, 0.8), let secondImg = bottomImg.image, let secondImgData = UIImageJPEGRepresentation(secondImg, 0.8){
+                print("4a")
+                FaceService.instance.client.detectWithData(firstImgData, returnFaceId: true, returnFaceLandmarks: false, returnFaceAttributes: ["gender", "facialHair"], completionBlock: { (face: [MPOFace]!, err: NSError!) in
+                    print("5a")
+                    if err == nil {
+                        var topFace: String?
+                        topFace = face[0].faceId
+                        var top = face[0].attributes.smile
+                        print("my faceId: \(topFace)")
+                        print("my faceId: \(top)")
+
+                    }
+                })
+            }
+        }
     }
-
-
+    
+    func showErrorAlert(){
+        let alert =  UIAlertController(title: "Choose images", message: "Tap panda and owl images to take selfie.", preferredStyle: UIAlertControllerStyle.Alert)
+        let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(ok)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage?{
+            if imgSelected == "top"{
+                topImg.image = pickedImage
+                hasChoosenTop = true
+            } else{
+                bottomImg.image = pickedImage
+                hasChoosenBottom = true
+            }
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func loadPicker(gesture: UITapGestureRecognizer){
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .PhotoLibrary
+        
+        if gesture.view?.tag == 0{
+            imgSelected = "top"
+        } else {
+            imgSelected = "bottom"
+        }
+        
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
 }
 
