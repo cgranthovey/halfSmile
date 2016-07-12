@@ -7,3 +7,6 @@
 //
 
 import Foundation
+import UIKit
+
+var SHADOW_COLOR: CGFloat = (157.0/255.0)

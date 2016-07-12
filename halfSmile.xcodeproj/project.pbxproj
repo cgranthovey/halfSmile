@@ -7,14 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BD37444A2DD5C7A4539157D /* Pods_halfSmile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D84A3533370B28031C86F9 /* Pods_halfSmile.framework */; };
+		A1CB309B1D345643000CF940 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309A1D345643000CF940 /* MaterialView.swift */; };
+		A1CB309E1D3456B5000CF940 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309D1D3456B5000CF940 /* Constants.swift */; };
+		A1CB30A01D345888000CF940 /* MaterialImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309F1D345888000CF940 /* MaterialImage.swift */; };
 		A1F72D501D305B0000E07E9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D4F1D305B0000E07E9C /* AppDelegate.swift */; };
 		A1F72D521D305B0000E07E9C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D511D305B0000E07E9C /* ViewController.swift */; };
 		A1F72D551D305B0000E07E9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F72D531D305B0000E07E9C /* Main.storyboard */; };
 		A1F72D571D305B0000E07E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1F72D561D305B0000E07E9C /* Assets.xcassets */; };
 		A1F72D5A1D305B0000E07E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F72D581D305B0000E07E9C /* LaunchScreen.storyboard */; };
+		A1F72D651D3063DC00E07E9C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D641D3063DC00E07E9C /* Person.swift */; };
+		A1F72D671D30645700E07E9C /* FaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D661D30645700E07E9C /* FaceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		338C3ABDD0A451A648D30473 /* Pods-halfSmile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-halfSmile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-halfSmile/Pods-halfSmile.debug.xcconfig"; sourceTree = "<group>"; };
+		46EC28603BEF4E8DFFA0437E /* Pods-halfSmile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-halfSmile.release.xcconfig"; path = "Pods/Target Support Files/Pods-halfSmile/Pods-halfSmile.release.xcconfig"; sourceTree = "<group>"; };
+		A1CB309A1D345643000CF940 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
+		A1CB309D1D3456B5000CF940 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A1CB309F1D345888000CF940 /* MaterialImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialImage.swift; sourceTree = "<group>"; };
 		A1F72D4C1D305B0000E07E9C /* halfSmile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = halfSmile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F72D4F1D305B0000E07E9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1F72D511D305B0000E07E9C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +33,10 @@
 		A1F72D561D305B0000E07E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1F72D591D305B0000E07E9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1F72D5B1D305B0000E07E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1F72D611D30606100E07E9C /* halfSmile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "halfSmile-Bridging-Header.h"; sourceTree = "<group>"; };
+		A1F72D641D3063DC00E07E9C /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		A1F72D661D30645700E07E9C /* FaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceService.swift; sourceTree = "<group>"; };
+		B3D84A3533370B28031C86F9 /* Pods_halfSmile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_halfSmile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +44,54 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BD37444A2DD5C7A4539157D /* Pods_halfSmile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7434A8FA738ABF9C184BC7EB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				338C3ABDD0A451A648D30473 /* Pods-halfSmile.debug.xcconfig */,
+				46EC28603BEF4E8DFFA0437E /* Pods-halfSmile.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9E2064DDB3AA057ED3C8CCFB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3D84A3533370B28031C86F9 /* Pods_halfSmile.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1CB30991D345628000CF940 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A1CB309A1D345643000CF940 /* MaterialView.swift */,
+				A1CB309F1D345888000CF940 /* MaterialImage.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A1CB309C1D3456A6000CF940 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A1CB309D1D3456B5000CF940 /* Constants.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		A1F72D431D305AFF00E07E9C = {
 			isa = PBXGroup;
 			children = (
 				A1F72D4E1D305B0000E07E9C /* halfSmile */,
 				A1F72D4D1D305B0000E07E9C /* Products */,
+				7434A8FA738ABF9C184BC7EB /* Pods */,
+				9E2064DDB3AA057ED3C8CCFB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,12 +106,17 @@
 		A1F72D4E1D305B0000E07E9C /* halfSmile */ = {
 			isa = PBXGroup;
 			children = (
+				A1CB309C1D3456A6000CF940 /* Utility */,
+				A1CB30991D345628000CF940 /* View */,
 				A1F72D4F1D305B0000E07E9C /* AppDelegate.swift */,
 				A1F72D511D305B0000E07E9C /* ViewController.swift */,
 				A1F72D531D305B0000E07E9C /* Main.storyboard */,
 				A1F72D561D305B0000E07E9C /* Assets.xcassets */,
 				A1F72D581D305B0000E07E9C /* LaunchScreen.storyboard */,
 				A1F72D5B1D305B0000E07E9C /* Info.plist */,
+				A1F72D611D30606100E07E9C /* halfSmile-Bridging-Header.h */,
+				A1F72D641D3063DC00E07E9C /* Person.swift */,
+				A1F72D661D30645700E07E9C /* FaceService.swift */,
 			);
 			path = halfSmile;
 			sourceTree = "<group>";
@@ -71,9 +128,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1F72D5E1D305B0000E07E9C /* Build configuration list for PBXNativeTarget "halfSmile" */;
 			buildPhases = (
+				0BCBC1CFB1D482E232AFD55A /* [CP] Check Pods Manifest.lock */,
 				A1F72D481D305B0000E07E9C /* Sources */,
 				A1F72D491D305B0000E07E9C /* Frameworks */,
 				A1F72D4A1D305B0000E07E9C /* Resources */,
+				88ECF40D3BC30ED294B47718 /* [CP] Embed Pods Frameworks */,
+				C97B558366A8874D10BB2613 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,13 +190,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0BCBC1CFB1D482E232AFD55A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		88ECF40D3BC30ED294B47718 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-halfSmile/Pods-halfSmile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C97B558366A8874D10BB2613 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-halfSmile/Pods-halfSmile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A1F72D481D305B0000E07E9C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1F72D671D30645700E07E9C /* FaceService.swift in Sources */,
+				A1F72D651D3063DC00E07E9C /* Person.swift in Sources */,
+				A1CB309B1D345643000CF940 /* MaterialView.swift in Sources */,
 				A1F72D521D305B0000E07E9C /* ViewController.swift in Sources */,
+				A1CB30A01D345888000CF940 /* MaterialImage.swift in Sources */,
 				A1F72D501D305B0000E07E9C /* AppDelegate.swift in Sources */,
+				A1CB309E1D3456B5000CF940 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,23 +362,30 @@
 		};
 		A1F72D5F1D305B0000E07E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 338C3ABDD0A451A648D30473 /* Pods-halfSmile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = halfSmile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrishovey.halfSmile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "halfSmile/halfSmile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		A1F72D601D305B0000E07E9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46EC28603BEF4E8DFFA0437E /* Pods-halfSmile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = halfSmile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrishovey.halfSmile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "halfSmile/halfSmile-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -288,6 +408,7 @@
 				A1F72D601D305B0000E07E9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

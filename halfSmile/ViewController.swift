@@ -48,20 +48,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     
     @IBAction func battleBtn(sender: UIButton){
-        print("1a")
         if !hasChoosenTop || !hasChoosenBottom{
-            print("2a")
             showErrorAlert()
         } else{
-            print("3a")
             if let firstImg = topImg.image, let firstImgData = UIImageJPEGRepresentation(firstImg, 0.8), let secondImg = bottomImg.image, let secondImgData = UIImageJPEGRepresentation(secondImg, 0.8){
-                print("4a")
-                FaceService.instance.client.detectWithData(firstImgData, returnFaceId: true, returnFaceLandmarks: false, returnFaceAttributes: ["gender", "facialHair"], completionBlock: { (face: [MPOFace]!, err: NSError!) in
-                    print("5a")
+                
+                FaceService.instance.client.detectWithData(firstImgData, returnFaceId: true, returnFaceLandmarks: false, returnFaceAttributes: [], completionBlock: { (face: [MPOFace]!, err: NSError!) in
                     if err == nil {
                         var topFace: String?
                         topFace = face[0].faceId
-                        var top = face[0].attributes.smile
+                        var top = face[0].attributes.age
                         print("my faceId: \(topFace)")
                         print("my faceId: \(top)")
 

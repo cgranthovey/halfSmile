@@ -1,0 +1,12 @@
+PODS:
+  - ProjectOxfordFace (1.0)
+
+DEPENDENCIES:
+  - ProjectOxfordFace
+
+SPEC CHECKSUMS:
+  ProjectOxfordFace: 6ee1f7b0a39b5d1cba20cf100d8f9d11ad264790
+
+PODFILE CHECKSUM: 3e422bc28b504a42a0a694e67409d79cbcf4c54d
+
+COCOAPODS: 1.0.1
