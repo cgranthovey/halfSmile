@@ -13,7 +13,7 @@ import UIKit
 class MaterialImage: UIImageView {
 
     override func awakeFromNib() {
-        layer.cornerRadius = 10.0
+        layer.cornerRadius = 0
         clipsToBounds = true
         
         

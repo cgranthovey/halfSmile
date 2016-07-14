@@ -11,11 +11,8 @@ import UIKit
 class MaterialView: UIView {
 
     override func awakeFromNib() {
-        layer.shadowColor = UIColor(red: SHADOW_COLOR, green: SHADOW_COLOR, blue: SHADOW_COLOR, alpha: 1.0).CGColor
-
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.6
-        layer.shadowOffset = CGSizeMake(0.0, 0.0)
+        layer.cornerRadius = 3.0
+        clipsToBounds = true
     }
-
+    
 }

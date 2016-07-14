@@ -1,12 +1,18 @@
 PODS:
+  - Canvas (0.1.2)
+  - NVActivityIndicatorView (2.7)
   - ProjectOxfordFace (1.0)
 
 DEPENDENCIES:
+  - Canvas (~> 0.1.2)
+  - NVActivityIndicatorView
   - ProjectOxfordFace
 
 SPEC CHECKSUMS:
+  Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
+  NVActivityIndicatorView: dc80f18fb27ac92f0aa87246cc13dc39ed3e9ee0
   ProjectOxfordFace: 6ee1f7b0a39b5d1cba20cf100d8f9d11ad264790
 
-PODFILE CHECKSUM: 3e422bc28b504a42a0a694e67409d79cbcf4c54d
+PODFILE CHECKSUM: bdd2b4701e582b8172cc9407418e725a0581adcd
 
 COCOAPODS: 1.0.1

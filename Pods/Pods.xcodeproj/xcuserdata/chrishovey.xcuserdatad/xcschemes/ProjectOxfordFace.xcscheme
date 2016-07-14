@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7733DE83C4D6E4940F94F3D9B7DB90F2'
+               BlueprintIdentifier = 'E86F164C23D3741151A8A061E771F5DD'
                BlueprintName = 'ProjectOxfordFace'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'ProjectOxfordFace.framework'>

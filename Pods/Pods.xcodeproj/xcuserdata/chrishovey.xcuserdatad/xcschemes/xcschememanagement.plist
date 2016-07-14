@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Canvas.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-halfSmile.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7733DE83C4D6E4940F94F3D9B7DB90F2</key>
+		<key>09B4475ED22D26F76E3CFF43B2D716E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F86FA4B7F172665534758B20F844E430</key>
+		<key>80CBCC225074FD190F9BEA2940592423</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF52805D1EA788084C4B3B18A87D7478</key>
+		<key>93DB04D0B8E3023921BBEEB78066EE2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BDDC4DBF7654960710F7FF7B28F35033</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E86F164C23D3741151A8A061E771F5DD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
