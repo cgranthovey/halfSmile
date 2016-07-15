@@ -118,7 +118,7 @@ class Person{
         self._pupilLeftX = Int(face.faceLandmarks.pupilLeft.x)
         self._pupilLeftY = Int(face.faceLandmarks.pupilLeft.y)
         self._pupilRightX = Int(face.faceLandmarks.pupilRight.x)
-        self._pupilRightX = Int(face.faceLandmarks.pupilRight.y)
+        self._pupilRightY = Int(face.faceLandmarks.pupilRight.y)
         
         self._noseTipX = Int(face.faceLandmarks.noseTip.x)
         self._noseTipY = Int(face.faceLandmarks.noseTip.y)
