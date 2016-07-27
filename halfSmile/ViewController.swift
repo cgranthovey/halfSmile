@@ -14,10 +14,11 @@ import NVActivityIndicatorView
 
 
 //icons 
-//panda  Creative Stall, Lucid Formation, sachan
+//panda  Creative Stall, Lucid Formation, sachan, Pranav Grover, Elena Rimeikaite,  Arthur Shlain, Creative Stall, Nick Bluth 
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var dict1: Dictionary<String, AnyObject>!
     
     @IBOutlet weak var topImg: UIImageView!
     @IBOutlet weak var bottomImg: UIImageView!
@@ -27,6 +28,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var rightSmall: UIView!
     @IBOutlet weak var containerView: MaterialView!
+    
+    @IBOutlet weak var battleBtnOutlet: UIButton!
+    @IBOutlet weak var slimView: UIView!
+    
+    @IBOutlet weak var backBtnOutlet: UIButton!
     
     var hasChoosenTop: Bool!
     var hasChoosenBottom: Bool!
@@ -40,7 +46,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let imagePicker = UIImagePickerController()
     
     var activityIndicatorView: NVActivityIndicatorView!
-    
+    var person1: Person!
+    var person2: Person!
+    var battleBtnPressedBoolean: Bool!
     override func viewDidLoad() {
         
 
@@ -54,7 +62,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityIndicatorView = NVActivityIndicatorView(frame: myWaitingFrame, type: .LineScalePulseOut, color: UIColor.whiteColor(), padding: 0)
         self.view.addSubview(activityIndicatorView)
         activityIndicatorView.center = self.view.center
-        activityIndicatorView.alpha = 0
         
         imagePicker.delegate = self
         let topTap = UITapGestureRecognizer(target: self, action: #selector(loadPicker(_:)))
@@ -73,16 +80,61 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         viewForButton.delay = 0
         viewForButton.type = CSAnimationTypePop
         
+        findImagesAndColor()
+        
     }
     
-    var person1: Person!
-    var person2: Person!
     
+    
+    override func viewWillAppear(animated: Bool) {
+        battleBtnPressedBoolean = false
+        activityIndicatorView.alpha = 0
+    }
+    
+    var topAnimal: String!
+    var bottomAnimal: String!
+    var color: UIColor!
+    
+    func findImagesAndColor(){
+        if let topAnimal = dict1["imageTop"] as? String{
+            self.topAnimal = topAnimal
+            topImg.image = UIImage(named: topAnimal)
+        }
+        if let bottomAnimal = dict1["imageBottom"] as? String{
+            self.bottomAnimal = bottomAnimal
+            bottomImg.image = UIImage(named: bottomAnimal)
+        }
+        if let color1 = dict1["color"] as? UIColor{
+            self.color = color1
+            rightSmall.backgroundColor = color1
+            slimView.backgroundColor = color1
+            battleBtnOutlet.backgroundColor = color1
+        }
+    }
+    
+    
+    
+    override func viewDidAppear(animated: Bool) {
+    }
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        if battleBtnPressedBoolean == true && hasChoosenTop == true && hasChoosenBottom == true{
+            self.rightSmall.transform = CGAffineTransformMakeScale(1, 2/self.containerView.frame.height)
+            hasChoosenTop = false
+            hasChoosenBottom = false
+
+        }
+    }
+    
+    
+
     @IBAction func battleBtn(sender: UIButton){
         viewForButton.startCanvasAnimation()
         if !hasChoosenTop || !hasChoosenBottom{
             showErrorAlert()
         } else{
+            battleBtnPressedBoolean = true
             growLines()
             if let firstImg = topImg.image, let firstImgData = UIImageJPEGRepresentation(firstImg, 0.8), let secondImg = bottomImg.image, let secondImgData = UIImageJPEGRepresentation(secondImg, 0.8){
                 FaceService.instance.client.detectWithData(firstImgData, returnFaceId: false, returnFaceLandmarks: true, returnFaceAttributes: [4], completionBlock: { (face: [MPOFace]!, err: NSError!) in
@@ -116,7 +168,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     func showErrorAlert(){
-        let alert =  UIAlertController(title: "Choose images", message: "Tap panda and owl images to take selfie.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert =  UIAlertController(title: "Choose images", message: "Tap animal images to take selfie.", preferredStyle: UIAlertControllerStyle.Alert)
         let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel, handler: nil)
         alert.addAction(ok)
         presentViewController(alert, animated: true, completion: nil)
@@ -127,9 +179,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if imgSelected == "top"{
                 topImg.image = pickedImage
                 hasChoosenTop = true
+                topImg.roundCornersForAspectFit(5.0)
             } else{
                 bottomImg.image = pickedImage
                 hasChoosenBottom = true
+                bottomImg.roundCornersForAspectFit(5.0)
             }
         }
         dismissViewControllerAnimated(true, completion: nil)
@@ -152,8 +206,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func growLines(){
 
         UIView.animateWithDuration(0.8, animations: {
-            print("help")
-            print(self.containerView.frame.height)
             self.rightSmall.transform = CGAffineTransformMakeScale(1, self.containerView.frame.height/2)
 
             }) { (true) in
@@ -164,19 +216,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             self.activityIndicatorView.startAnimation()
                             self.activityIndicatorView.alpha = 1
                         }){(true) in
-                            self.timerDone = true
-                            var timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: #selector(self.secondAnimation), userInfo: nil, repeats: false)
-                    }
-                    
+                            var timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: #selector(self.callSecondAnimation), userInfo: nil, repeats: false)
+                    } 
                 }
         }
+    }
+
+    
+    var myWhiteView: UIView!
+    
+    func callSecondAnimation(){
+        self.timerDone = true
+        secondAnimation()
     }
     
     func secondAnimation(){
         
         if firstDownloaded == true && secondDownloaded == true && timerDone == true{
             let aFrame = CGRectMake(0, 0, 2, 2)
-            var myWhiteView = UIView(frame: aFrame)
+            myWhiteView = UIView(frame: aFrame)
             myWhiteView.backgroundColor = UIColor.whiteColor()
             self.view.addSubview(myWhiteView)
             myWhiteView.center.x = self.view.center.x
@@ -184,31 +242,50 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
             
             UIView.animateWithDuration(0.7, animations: {
-                myWhiteView.transform = CGAffineTransformMakeScale(self.view.frame.width/2, 1)
+                self.myWhiteView.transform = CGAffineTransformMakeScale(self.view.frame.width/2, 1)
             }) { (true) in
                 UIView.animateWithDuration(0.7, animations: {
-                    myWhiteView.transform = CGAffineTransformMakeScale(self.view.frame.width/2, self.view.frame.height/2)
+                    self.myWhiteView.transform = CGAffineTransformMakeScale(self.view.frame.width/2, self.view.frame.height/2)
                 }){ (true) in
-                    
+                    self.resetVC()
                     let myDictionary: [String: AnyObject] = ["person1": self.person1, "person2": self.person2]
-                    self.performSegueWithIdentifier("WinnerVC", sender: myDictionary)
+                    self.performSegueWithIdentifier("SecondWinnerVC", sender: myDictionary)
                 }
             }
         }
     }
     
-    
-    
-    
+    func resetVC(){
+        activityIndicatorView.stopAnimation()
+
+        topImg.image = UIImage(named: topAnimal)
+        bottomImg.image = UIImage(named: bottomAnimal)
+        self.topImg.roundCornersForAspectFit(0)
+        self.bottomImg.roundCornersForAspectFit(0)
+        myWhiteView.removeFromSuperview()
+
+        timerDone = false
+        firstDownloaded = false
+        secondDownloaded = false
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "WinnerVC"{
-            if let myWinnerVC = segue.destinationViewController as? WinnerVC{
+        if segue.identifier == "SecondWinnerVC"{
+            if let myWinnerVC = segue.destinationViewController as? SecondWinnerVC{
                 if let dict = sender as? [String: AnyObject]{
+                    myWinnerVC.dict = self.dict1
                     myWinnerVC.mySegueDictionary = dict
                 }
             }
         }
     }
+    
+    @IBAction func backBtn(sender: AnyObject){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
+    
     
 }
 

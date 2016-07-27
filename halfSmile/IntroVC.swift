@@ -13,23 +13,33 @@ class IntroVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func fullSmileBtn(sender: AnyObject){
+        
+        let dict = ["button": "full", "imageTop": "frogClear", "imageBottom": "monkeyClear", "color": ORANGE_COLOR]
+        performSegueWithIdentifier("toViewController", sender: dict)
     }
-    */
+    
+    @IBAction func halfSmileBtn(sender: AnyObject){
+        let dict = ["button": "half", "imageTop": "penguin", "imageBottom": "panda", "color": BLUE_COLOR]
+        performSegueWithIdentifier("toViewController", sender: dict)
+    }
+    
+    @IBAction func zeroSmileBtm(sender: AnyObject){
+        let dict = ["button": "zero", "imageTop": "pandaClear", "imageBottom": "frogZeroClear", "color": GREEN_COLOR]
+        performSegueWithIdentifier("toViewController", sender: dict)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toViewController"{
+            if let vc = segue.destinationViewController as? ViewController{
+                if let dict = sender as? Dictionary<String, AnyObject>{
+                    vc.dict1 = dict
+                }
+            }
+        }
+    }
 
 }

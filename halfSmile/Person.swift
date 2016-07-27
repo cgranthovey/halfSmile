@@ -11,7 +11,7 @@ import UIKit
 import ProjectOxfordFace
 
 class Person{
-    private var _smile: String!
+    private var _smile: Double!
     private var _selfieImage: UIImage!
     
     private var _faceWidth: Int!
@@ -38,10 +38,7 @@ class Person{
     private var _underLipBottomY: Int!
     
     
-    var smile: String{
-        if _smile == nil{
-            _smile = "no smile"
-        }
+    var smile: Double{
         return self._smile
     }
     var selfieImage: UIImage{
@@ -106,7 +103,7 @@ class Person{
     }
     
     init(face: MPOFace, image: UIImage){
-        self._smile = face.attributes.smile.stringValue
+        self._smile = Double(face.attributes.smile)
         
         self._selfieImage = image
         
