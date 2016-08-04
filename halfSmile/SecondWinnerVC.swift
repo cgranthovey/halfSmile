@@ -11,7 +11,7 @@ import SpriteKit
 import AVFoundation
 import Canvas
 
-class SecondWinnerVC: UIViewController {
+class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
     
     var mySegueDictionary = [String: AnyObject]()
     var dict = [String: AnyObject]()
@@ -23,19 +23,21 @@ class SecondWinnerVC: UIViewController {
     
     @IBOutlet weak var randomViewForAnimation: UIView!
     
+    
     var person1: Person!
     var person2: Person!
-    
+    var sfxTick: AVAudioPlayer!
+    var sfxSwing: AVAudioPlayer!
+    var sfxSwing2: AVAudioPlayer!
+    var sfxWind: AVAudioPlayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        parseDict()
-//        findFace(person1, personImageView: topImage)
         
+        parseDict()
+        parseFacePointColor()
         shadow.hidden = true
         topImage.hidden = true
-
-//        findFace(person2, personImageView: bottomImage)
     }
     
     var topAlphaView1: UIView!
@@ -47,15 +49,55 @@ class SecondWinnerVC: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        initAudio()
         
+        
+
         let firstPersonDict = ["person": person1, "img": topImage]
         let secondPersonDict = ["person": person2, "img": topImage]
         NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: firstPersonDict, repeats: false)
-        NSTimer.scheduledTimerWithTimeInterval(3.5, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: secondPersonDict, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(3.75, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: secondPersonDict, repeats: false)
 
     }
-
     
+    var facePointColor: UIColor!
+    
+    func parseFacePointColor(){
+        if let color = dict["color"] as? UIColor{
+            facePointColor = color
+        }
+    }
+
+    func initAudio(){
+        do {
+            print("arnold 2")
+            try sfxTick = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("poolBalls", ofType: "mp3")!))
+            sfxTick.prepareToPlay()
+            sfxTick.volume = 0.5
+            try sfxWind = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("wind", ofType: "mp3")!))
+            sfxWind.prepareToPlay()
+            sfxWind.volume = 0.7
+            try sfxSwing = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("swish", ofType: "mp3")!))
+            sfxSwing.prepareToPlay()
+            sfxSwing.volume = 0.1
+
+            if sfxSwing == nil{
+                print("sfxswing nil")
+            }
+
+
+        } catch let err as NSError {
+            print(err.debugDescription)
+        }
+    }
+
+    func sfxTickFunc(){
+        if sfxTick.playing{
+            sfxTick.stop()
+            sfxTick.currentTime = 0
+        }
+        sfxTick.play()
+    }
     
     
     func parseDict(){
@@ -63,12 +105,43 @@ class SecondWinnerVC: UIViewController {
         person2 = mySegueDictionary["person2"] as! Person
     }
     
+    func radians (degrees: Double) -> CGFloat{
+        return CGFloat(degrees * M_PI / 180)
+    }
+    
+
     func findFace(person: Person, personImageView: UIImageView){
         var cgImageObject: CGImage!
         let rectFace = CGRectMake(CGFloat(person.faceLeft), CGFloat(person.faceTop), CGFloat(person.faceWidth), CGFloat(person.faceHeight))
-        cgImageObject = CGImageCreateWithImageInRect(person.selfieImage.CGImage, rectFace)
-        personImageView.image = UIImage(CGImage: cgImageObject!)
+        
+        print("face left\(person.faceLeft)")
+        print("face top\(person.faceTop)")
+        print("face width \(person.faceWidth)")
+        print("face height \(person.faceHeight)")
+        
+        
+     
+        cgImageObject = CGImageCreateWithImageInRect(person.selfieImage.CGImage!, rectFace)
+
+
+        var hey = person.selfieImage
+        var yo  = hey.fixOrientation()
+        var yoToCG = yo.CGImage
+        
+        var ai = CGImageCreateWithImageInRect(yoToCG, rectFace)
+        var aiToUI = UIImage(CGImage: ai!)
+        personImageView.image = aiToUI
+        
+
         personImageView.roundCornersForAspectFit(5)
+    }
+    
+    func swoosh(number: Int){
+        if number == 1{
+            sfxSwing.play()
+        } else if number == 2{
+            sfxSwing2.play()
+        }
     }
     
     @objc func animateZoom(timer: NSTimer){
@@ -84,6 +157,7 @@ class SecondWinnerVC: UIViewController {
             topAlphaView1 = makeAlphaView(topImage)
         }
         let view = topAlphaView1
+        view.alpha = 0.45
 
         let original = shadow.center.x
         shadow.center.x = -shadow.frame.width
@@ -94,12 +168,13 @@ class SecondWinnerVC: UIViewController {
             faceDotView.removeFromSuperview()
         }
         
-        UIView.animateWithDuration(0.5, delay: 0.1, usingSpringWithDamping: 1.5, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.5, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.shadow.center.x  = original
+            self.sfxWind.play()
 
         }){ (true) in
 //            UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-//                view.alpha = 0.0
 //                }, completion: { (true) in
                     UIView.animateWithDuration(0.2, animations: {
                         self.randomViewForAnimation.center.x = self.randomViewForAnimation.center.x + 50
@@ -126,19 +201,20 @@ class SecondWinnerVC: UIViewController {
                                                                                 self.makeFrameForFacePoints(person.pupileRightX, yPoint: person.pupilRightY, person: person, personImageView: personImageView)
                                                                                 }, completion: { (true) in
                                                                                     
-                                                                                    UIView.animateWithDuration(0.25, animations: {
-                                                                                        self.randomViewForAnimation.center.x = self.randomViewForAnimation.center.x - 50
+                                                                                    UIView.animateWithDuration(0.20, animations: {
+                                                                                        self.randomViewForAnimation.center.x = self.randomViewForAnimation.center.x - 65
                                                                                         }, completion: { (true) in
-                                                                                            UIView.animateWithDuration(0.2, animations: {
-                                                                                                view.alpha = 0.35
+                                                                                            UIView.animateWithDuration(0.35, animations: {
+                                                                                                self.randomViewForAnimation.center.x = self.randomViewForAnimation.center.x + 15
                                                                                                 }, completion: {(true) in
-                                                                                                    UIView.animateWithDuration(0.5, delay: 0.3, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseIn
+                                                                                                    UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseIn
                                                                                                         , animations: {
                                                                                                             self.shadow.center.x = self.view.frame.width + 300
+                                                                                                            self.sfxSwing.play()
                                                                                                         }, completion: {(true) in
                                                                                                             personImageView.hidden = true
                                                                                                             personImageView.image = UIImage(named: "giraffe")
-                                                                                                            view.alpha = 0
+//                                                                                                            view.alpha = 0
                                                                                                             if self.hasCompletedOnce == true{
                                                                                                                 self.performSegueWithIdentifier("ResultVC", sender: nil)
                                                                                                             }
@@ -150,8 +226,8 @@ class SecondWinnerVC: UIViewController {
                                                                     })
                                                             })
                                                     })
-  //                                          })
-                                    })
+                                            })
+  //                                  })
                             })
                     })
 
@@ -161,17 +237,21 @@ class SecondWinnerVC: UIViewController {
             
         }
     }
+
     
     var faceDotViews = [UIView]()
     
     func makeFrameForFacePoints(xPoint: Int, yPoint: Int, person: Person, personImageView: UIImageView){
+        
+        self.sfxTickFunc()
+        
         var rect = AVMakeRectWithAspectRatioInsideRect((personImageView.image?.size)!, personImageView.bounds)
         let imageStartPointX = ((personImageView.frame.size.width) - rect.width) / 2
         let imageStartPointY = ((personImageView.frame.size.height) - rect.height) / 2
         
         let frame1 = CGRectMake(CGFloat(xPoint - person.faceLeft) * rect.width / (personImageView.image?.size.width)! - 3 + imageStartPointX, CGFloat(yPoint - person.faceTop) * rect.height / (personImageView.image?.size.height)! - 3 + imageStartPointY, 6, 6)
         let view = UIView(frame: frame1)
-        view.backgroundColor = UIColor(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        view.backgroundColor = facePointColor
         faceDotViews.append(view)
         personImageView.addSubview(view)
     }
@@ -201,5 +281,12 @@ class SecondWinnerVC: UIViewController {
         }
     }
 
-
 }
+
+
+
+
+
+
+
+

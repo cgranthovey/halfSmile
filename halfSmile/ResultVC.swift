@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Canvas
+import AVFoundation
 
 class ResultVC: UIViewController {
 
@@ -15,6 +17,12 @@ class ResultVC: UIViewController {
     
     var person1: Person!
     var person2: Person!
+    
+    var sfxBoing: AVAudioPlayer!
+    var sfxSlide: AVAudioPlayer!
+    var sfxKnife: AVAudioPlayer!
+    
+    var swipeRight: UISwipeGestureRecognizer!
     
     @IBOutlet weak var winnerSelfieImg: UIImageView!
     @IBOutlet weak var secondPlaceSelfieImg: UIImageView!
@@ -27,18 +35,129 @@ class ResultVC: UIViewController {
     
     @IBOutlet weak var topShadow: UIView!
     
+    @IBOutlet weak var playAgainButtonOutlet: UIButton!
+    
+    @IBOutlet weak var underLineView: UIView!
+    
+    @IBOutlet weak var gameTypeLbl: UILabel!
+    @IBOutlet weak var gameTypeExplanationLbl: UILabel!
+    
+    
+    @IBOutlet weak var coverView: UIView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var topViewSlim: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomViewSlim: UIView!
+    
+    @IBOutlet weak var bottomMaterialView: MaterialView!
+    
+    @IBOutlet weak var viewForWinnerLbl: CSAnimationView!
+    @IBOutlet weak var smallView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         
 //        topShadow.hidden = true
 //        winnerSelfieImg.hidden = true
+        initAudio()
+        swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ResultVC.popBack))
+        swipeRight.direction = .Right
+        view.addGestureRecognizer(swipeRight)
+        
         parseSegueDict()
+        parseOverallDict()
+        
         print("person1: \(person1.smile)")
         print("person2: \(person2.smile)")
 //        determineWinnerHalf
         whichWinnerFunction()
+        animateBeginning()
+        
+        viewForWinnerLbl.delay = 0.0
+        viewForWinnerLbl.duration = 0.5
+        viewForWinnerLbl.type = CSAnimationTypeShake
+        
+        
+        
+        
+    }
+    
+    
+    
+    func initAudio(){
+        do{
+            try sfxBoing = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("boing", ofType: "mp3")!))
+            sfxBoing.prepareToPlay()
+            sfxBoing.volume = 0.5
+            try sfxKnife = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("knife", ofType: "mp3")!))
+            sfxKnife.prepareToPlay()
+            sfxKnife.volume = 0.5
+            try sfxSlide = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("slide", ofType: "mp3")!))
+            sfxSlide.prepareToPlay()
+            sfxSlide.volume = 0.5
+        } catch let err as NSError{
+            print(err.debugDescription)
+        }
+    }
+    
+    var mainColor: UIColor!
+    
+    
+    func animateBeginning(){
+        var originalTopX = topView.center.x
+        var originalBottomX = bottomView.center.x
+        
+        topView.center.x = -view.frame.width/2
+        bottomView.center.x = -view.frame.width/2
+        
+        
+        UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.topView.center.x = originalTopX
+            self.bottomView.center.x = originalBottomX
+            self.sfxKnife.play()
+            }) { (true) in
+                self.coverView.hidden = true
+                
+                UIView.animateWithDuration(0.2, animations: {
+                    self.smallView.center.x = self.smallView.center.x + 2
+                    }, completion: { (true) in
+                        
+                        UIView.animateWithDuration(1.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                            self.sfxSlide.play()
+                            self.topView.center.y = -self.view.frame.height
+                            self.bottomView.center.y = self.view.frame.height * 2
+                        }) { (true) in
+                            if self.winnerLbl.text != "Tie"{
+                                self.viewForWinnerLbl.startCanvasAnimation()
+                                self.sfxBoing.play()
+                            }
+                        }
+                })
+                
+
+        }
+    }
+    
+    
+    
+    func parseOverallDict(){
+        if let color = dict["color"] as? UIColor{
+            mainColor = color
+            playAgainButtonOutlet.backgroundColor = mainColor
+            underLineView.backgroundColor = mainColor
+            topViewSlim.backgroundColor = mainColor
+            bottomViewSlim.backgroundColor = mainColor
+        }
+        
+        if let topLabel = dict["gameType"] as? String{
+            gameTypeLbl.text = topLabel
+        }
+        
+        if let gameExplanation = dict["gameExplanation"] as? String{
+            gameTypeExplanationLbl.text = gameExplanation
+        }
+        
     }
 
     func whichWinnerFunction(){
@@ -87,6 +206,7 @@ class ResultVC: UIViewController {
             setLabels(person1, secondPlace: person2)
             winnerLbl.text = "Tie"
             secondPlaceLbl.text = "Tie"
+
         }
     }
     
@@ -101,21 +221,35 @@ class ResultVC: UIViewController {
             setLabels(person1, secondPlace: person2)
             winnerLbl.text = "Tie"
             secondPlaceLbl.text = "Tie"
+
         }
     }
 
     func setLabels(winner: Person, secondPlace: Person){
+        
+        if person1.smile != person2.smile{
+            winnerLbl.textColor = UIColor(red: 233.0/255.0, green: 30.0/255.0, blue: 99.0/255.0, alpha: 1.0)
+            bottomMaterialView.backgroundColor = UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 238.0/255.0)
+
+        }
+        
+
+        
         winnerSelfieImg.image = winner.selfieImage
         secondPlaceSelfieImg.image = secondPlace.selfieImage
-        
-        if let holdTemp = dict["button"] as? String{
-            if holdTemp == "half"{
-                determinePercentage(winner, percentLabel: winnerPercentageLbl)
-                determinePercentage(secondPlace, percentLabel: secondPlacePercentageLbl)
-            } else{
-                winnerPercentageLbl.text = "\(round(10 * winner.smile * 100) / 10)%"
-                secondPlacePercentageLbl.text = "\(round(10 * secondPlace.smile * 100) / 10)%"
-            }
+        print("winnerNumber \(winner.smile)")
+        var winnerNumber = round(10 * winner.smile * 100) / 10
+        var secondPlaceNumber = round(10 * secondPlace.smile * 100) / 10
+        print(winnerNumber)
+        if winnerNumber == 100{
+            winnerPercentageLbl.text = "100%"
+        } else{
+            winnerPercentageLbl.text = "\(winnerNumber)%"
+        }
+        if secondPlaceNumber == 100{
+            secondPlacePercentageLbl.text = "100%"
+        } else{
+            secondPlacePercentageLbl.text = "\(secondPlaceNumber)%"
         }
     }
     
@@ -128,10 +262,14 @@ class ResultVC: UIViewController {
     }
     
     
+    
     @IBAction func playAgainBtn(sender: AnyObject){
         self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
+    func popBack(){
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
 
     
 }

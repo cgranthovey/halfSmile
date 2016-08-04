@@ -12,11 +12,22 @@
 		A10408DE1D3D84F300857222 /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10408DD1D3D84F300857222 /* ResultVC.swift */; };
 		A12768B91D36D47700732CDD /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12768B81D36D47700732CDD /* MaterialButton.swift */; };
 		A12768BB1D36D7C300732CDD /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12768BA1D36D7C300732CDD /* ShadowView.swift */; };
+		A1320CD81D4FFC99007A1FA7 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1320CD71D4FFC98007A1FA7 /* UIImageExtension.swift */; };
+		A1320CDB1D50202D007A1FA7 /* metalClick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1320CDA1D50202D007A1FA7 /* metalClick.mp3 */; };
+		A1320CDD1D502A88007A1FA7 /* InformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1320CDC1D502A88007A1FA7 /* InformationVC.swift */; };
 		A17ACC961D47D99300AD9F3B /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ACC951D47D99300AD9F3B /* IntroVC.swift */; };
 		A1A5569A1D37F9A8002059C0 /* WinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A556991D37F9A8002059C0 /* WinnerVC.swift */; };
+		A1B661421D4991A500076E0E /* IAmTheCrayonMaster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B661411D49903500076E0E /* IAmTheCrayonMaster.ttf */; };
+		A1B661441D4A7A9700076E0E /* ErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B661431D4A7A9700076E0E /* ErrorVC.swift */; };
 		A1CB309B1D345643000CF940 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309A1D345643000CF940 /* MaterialView.swift */; };
 		A1CB309E1D3456B5000CF940 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309D1D3456B5000CF940 /* Constants.swift */; };
 		A1CB30A01D345888000CF940 /* MaterialImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309F1D345888000CF940 /* MaterialImage.swift */; };
+		A1E733121D51427400406F4D /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1E733111D51427400406F4D /* wind.mp3 */; };
+		A1E7331A1D52666600406F4D /* swish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1E733191D52666600406F4D /* swish.mp3 */; };
+		A1E7331C1D526B6700406F4D /* poolBalls.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1E7331B1D526B6700406F4D /* poolBalls.mp3 */; };
+		A1E733201D526F8400406F4D /* knife.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1E7331D1D526F8400406F4D /* knife.mp3 */; };
+		A1E733211D526F8400406F4D /* boing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1E7331E1D526F8400406F4D /* boing.mp3 */; };
+		A1E733221D526F8400406F4D /* slide.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1E7331F1D526F8400406F4D /* slide.mp3 */; };
 		A1F72D501D305B0000E07E9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D4F1D305B0000E07E9C /* AppDelegate.swift */; };
 		A1F72D521D305B0000E07E9C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D511D305B0000E07E9C /* ViewController.swift */; };
 		A1F72D551D305B0000E07E9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F72D531D305B0000E07E9C /* Main.storyboard */; };
@@ -33,11 +44,22 @@
 		A10408DD1D3D84F300857222 /* ResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
 		A12768B81D36D47700732CDD /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
 		A12768BA1D36D7C300732CDD /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		A1320CD71D4FFC98007A1FA7 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		A1320CDA1D50202D007A1FA7 /* metalClick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = metalClick.mp3; sourceTree = "<group>"; };
+		A1320CDC1D502A88007A1FA7 /* InformationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationVC.swift; sourceTree = "<group>"; };
 		A17ACC951D47D99300AD9F3B /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		A1A556991D37F9A8002059C0 /* WinnerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerVC.swift; sourceTree = "<group>"; };
+		A1B661411D49903500076E0E /* IAmTheCrayonMaster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IAmTheCrayonMaster.ttf; sourceTree = "<group>"; };
+		A1B661431D4A7A9700076E0E /* ErrorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorVC.swift; sourceTree = "<group>"; };
 		A1CB309A1D345643000CF940 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		A1CB309D1D3456B5000CF940 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1CB309F1D345888000CF940 /* MaterialImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialImage.swift; sourceTree = "<group>"; };
+		A1E733111D51427400406F4D /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
+		A1E733191D52666600406F4D /* swish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swish.mp3; sourceTree = "<group>"; };
+		A1E7331B1D526B6700406F4D /* poolBalls.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = poolBalls.mp3; sourceTree = "<group>"; };
+		A1E7331D1D526F8400406F4D /* knife.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = knife.mp3; sourceTree = "<group>"; };
+		A1E7331E1D526F8400406F4D /* boing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boing.mp3; sourceTree = "<group>"; };
+		A1E7331F1D526F8400406F4D /* slide.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slide.mp3; sourceTree = "<group>"; };
 		A1F72D4C1D305B0000E07E9C /* halfSmile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = halfSmile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F72D4F1D305B0000E07E9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1F72D511D305B0000E07E9C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,14 +110,31 @@
 				A10408DB1D39E6F600857222 /* SecondWinnerVC.swift */,
 				A10408DD1D3D84F300857222 /* ResultVC.swift */,
 				A17ACC951D47D99300AD9F3B /* IntroVC.swift */,
+				A1B661431D4A7A9700076E0E /* ErrorVC.swift */,
+				A1320CDC1D502A88007A1FA7 /* InformationVC.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		A1320CD91D50201F007A1FA7 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1320CDA1D50202D007A1FA7 /* metalClick.mp3 */,
+				A1E733111D51427400406F4D /* wind.mp3 */,
+				A1E733191D52666600406F4D /* swish.mp3 */,
+				A1E7331D1D526F8400406F4D /* knife.mp3 */,
+				A1E7331E1D526F8400406F4D /* boing.mp3 */,
+				A1E7331F1D526F8400406F4D /* slide.mp3 */,
+				A1E7331B1D526B6700406F4D /* poolBalls.mp3 */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 		A1A5569B1D381DD2002059C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				A1F72D641D3063DC00E07E9C /* Person.swift */,
+				A1320CD71D4FFC98007A1FA7 /* UIImageExtension.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -114,6 +153,7 @@
 		A1CB309C1D3456A6000CF940 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				A1B661411D49903500076E0E /* IAmTheCrayonMaster.ttf */,
 				A1CB309D1D3456B5000CF940 /* Constants.swift */,
 			);
 			name = Utility;
@@ -140,6 +180,7 @@
 		A1F72D4E1D305B0000E07E9C /* halfSmile */ = {
 			isa = PBXGroup;
 			children = (
+				A1320CD91D50201F007A1FA7 /* resources */,
 				A1CB309C1D3456A6000CF940 /* Utility */,
 				A1A5569B1D381DD2002059C0 /* Model */,
 				A1CB30991D345628000CF940 /* View */,
@@ -216,8 +257,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1E7331A1D52666600406F4D /* swish.mp3 in Resources */,
+				A1E733221D526F8400406F4D /* slide.mp3 in Resources */,
+				A1E733121D51427400406F4D /* wind.mp3 in Resources */,
+				A1E733211D526F8400406F4D /* boing.mp3 in Resources */,
+				A1E7331C1D526B6700406F4D /* poolBalls.mp3 in Resources */,
+				A1320CDB1D50202D007A1FA7 /* metalClick.mp3 in Resources */,
+				A1E733201D526F8400406F4D /* knife.mp3 in Resources */,
 				A1F72D5A1D305B0000E07E9C /* LaunchScreen.storyboard in Resources */,
 				A1F72D571D305B0000E07E9C /* Assets.xcassets in Resources */,
+				A1B661421D4991A500076E0E /* IAmTheCrayonMaster.ttf in Resources */,
 				A1F72D551D305B0000E07E9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,12 +331,15 @@
 				A1F72D671D30645700E07E9C /* FaceService.swift in Sources */,
 				A1F72D651D3063DC00E07E9C /* Person.swift in Sources */,
 				A12768B91D36D47700732CDD /* MaterialButton.swift in Sources */,
+				A1B661441D4A7A9700076E0E /* ErrorVC.swift in Sources */,
 				A1CB309B1D345643000CF940 /* MaterialView.swift in Sources */,
 				A17ACC961D47D99300AD9F3B /* IntroVC.swift in Sources */,
+				A1320CD81D4FFC99007A1FA7 /* UIImageExtension.swift in Sources */,
 				A1A5569A1D37F9A8002059C0 /* WinnerVC.swift in Sources */,
 				A1F72D521D305B0000E07E9C /* ViewController.swift in Sources */,
 				A1CB30A01D345888000CF940 /* MaterialImage.swift in Sources */,
 				A10408DC1D39E6F600857222 /* SecondWinnerVC.swift in Sources */,
+				A1320CDD1D502A88007A1FA7 /* InformationVC.swift in Sources */,
 				A1F72D501D305B0000E07E9C /* AppDelegate.swift in Sources */,
 				A1CB309E1D3456B5000CF940 /* Constants.swift in Sources */,
 			);
@@ -412,6 +464,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "halfSmile/halfSmile-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -426,6 +479,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrishovey.halfSmile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "halfSmile/halfSmile-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

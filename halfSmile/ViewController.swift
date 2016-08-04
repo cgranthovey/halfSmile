@@ -10,11 +10,13 @@ import UIKit
 import ProjectOxfordFace
 import Foundation
 import Canvas
+import AVFoundation
 import NVActivityIndicatorView
 
 
 //icons 
 //panda  Creative Stall, Lucid Formation, sachan, Pranav Grover, Elena Rimeikaite,  Arthur Shlain, Creative Stall, Nick Bluth 
+
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -22,7 +24,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var topImg: UIImageView!
     @IBOutlet weak var bottomImg: UIImageView!
-    
     
     @IBOutlet weak var viewForButton: CSAnimationView!
     
@@ -32,13 +33,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var battleBtnOutlet: UIButton!
     @IBOutlet weak var slimView: UIView!
     
-    @IBOutlet weak var backBtnOutlet: UIButton!
-    
     var hasChoosenTop: Bool!
     var hasChoosenBottom: Bool!
     var imgSelected: String!
     
-    var timerDone: Bool = false
+    var timerDone: Bool!
     var firstDownloaded: Bool = false
     var secondDownloaded: Bool = false
     
@@ -49,13 +48,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var person1: Person!
     var person2: Person!
     var battleBtnPressedBoolean: Bool!
+    
+    var swipeRight: UISwipeGestureRecognizer!
+    var errorCalledOnceAlready: Bool!
+    
+    var anErrorTop: Bool!
+    var anErrorBottom: Bool!
+    
     override func viewDidLoad() {
-        
-
-        
         super.viewDidLoad()
         hasChoosenTop = false
         hasChoosenBottom = false
+        
+        swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.popBack))
+        swipeRight.direction = .Right
+        view.addGestureRecognizer(swipeRight)
         
         let myWaitingFrame = CGRectMake(0, 0, 40, 40)
         
@@ -69,6 +76,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let bottomTap = UITapGestureRecognizer(target: self, action: #selector(loadPicker(_:)))
         bottomTap.numberOfTapsRequired = 1
+        print("viewDidLoad")
+        errorCalledOnceAlready = false
         
         topImg.addGestureRecognizer(topTap)
         topImg.tag = 0
@@ -81,14 +90,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         viewForButton.type = CSAnimationTypePop
         
         findImagesAndColor()
-        
     }
-    
-    
     
     override func viewWillAppear(animated: Bool) {
         battleBtnPressedBoolean = false
+        timerDone = false
+        firstDownloaded = false
+        secondDownloaded = false
+        anErrorTop = false
+        anErrorBottom = false
         activityIndicatorView.alpha = 0
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        errorCalledOnceAlready = false
     }
     
     var topAnimal: String!
@@ -110,12 +125,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             slimView.backgroundColor = color1
             battleBtnOutlet.backgroundColor = color1
         }
+        
+        if let battleType = dict1["gameType"] as? String{
+            battleBtnOutlet.setTitle(battleType.uppercaseString + " BATTLE", forState: .Normal)
+        }
     }
     
     
     
-    override func viewDidAppear(animated: Bool) {
-    }
+ 
     
     
     override func viewDidDisappear(animated: Bool) {
@@ -123,44 +141,81 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.rightSmall.transform = CGAffineTransformMakeScale(1, 2/self.containerView.frame.height)
             hasChoosenTop = false
             hasChoosenBottom = false
-
         }
     }
     
-    
+    var holdString: String!
 
     @IBAction func battleBtn(sender: UIButton){
-        viewForButton.startCanvasAnimation()
         if !hasChoosenTop || !hasChoosenBottom{
             showErrorAlert()
         } else{
+            viewForButton.startCanvasAnimation()
             battleBtnPressedBoolean = true
             growLines()
             if let firstImg = topImg.image, let firstImgData = UIImageJPEGRepresentation(firstImg, 0.8), let secondImg = bottomImg.image, let secondImgData = UIImageJPEGRepresentation(secondImg, 0.8){
                 FaceService.instance.client.detectWithData(firstImgData, returnFaceId: false, returnFaceLandmarks: true, returnFaceAttributes: [4], completionBlock: { (face: [MPOFace]!, err: NSError!) in
                     if err == nil {
-                        if let faceA: MPOFace = face[0]{
-                            let img = self.topImg.image!
-                            self.person1 = Person(face: faceA, image: img)
-                        }
                         
+                        if face.count != 0{
+                            if let faceA: MPOFace = face[0]{
+                                let img = self.topImg.image!
+                                self.person1 = Person(face: faceA, image: img)
+                                
+                                self.firstDownloaded = true
+                                self.prepForEditVC()
+                                self.secondAnimation()
+                            }
+                        } else {
+                            self.holdString = "Could not detect a face in at least one of the images"
+                            self.anErrorTop = true
+                            self.prepForEditVC()
+                        }
                     } else{
+                        if let holdError = err.localizedFailureReason{
+                            self.holdString = holdError
+                            self.anErrorTop = true
+                            self.prepForEditVC()
+                        } else{
+                            self.holdString = "The images could not be processed"
+                            self.anErrorTop = true
+                            self.prepForEditVC()
+                        }
                         print (err.debugDescription)
                     }
-                    self.firstDownloaded = true
-                    self.secondAnimation()
                 })
                 FaceService.instance.client.detectWithData(secondImgData, returnFaceId: false, returnFaceLandmarks: true, returnFaceAttributes: [4], completionBlock: { (face: [MPOFace]!, err: NSError!) in
                     if err == nil{
-                        if let faceA: MPOFace = face[0]{
-                            let img = self.bottomImg.image!
-                            self.person2 = Person(face: faceA, image: img)
+                        
+                        if face.count != 0{
+                            if let faceA: MPOFace = face[0]{
+                                let img = self.bottomImg.image!
+                                self.person2 = Person(face: faceA, image: img)
+                                
+                                self.secondDownloaded = true
+                                self.prepForEditVC()
+                                self.secondAnimation()
+                            }
+                        } else {
+                            self.holdString = "Could not detect a face in at least one of the images"
+                            self.anErrorBottom = true
+                            self.prepForEditVC()
                         }
+                        
+
                     } else{
+                        if let holdError = err.localizedFailureReason{
+                            self.holdString = holdError
+                            self.anErrorBottom = true
+                            self.prepForEditVC()
+                        } else{
+                            self.holdString =  "The images could not be processed"
+                            self.anErrorBottom = true
+                            self.prepForEditVC()
+                        }
                         print(err.debugDescription)
                     }
-                    self.secondDownloaded = true
-                    self.secondAnimation()
+
                 })
             }
         }
@@ -174,8 +229,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    func loadPicker(gesture: UITapGestureRecognizer){
+      //  imagePicker.allowsEditing = true
+        imagePicker.sourceType = .PhotoLibrary
+//        imagePicker.cameraDevice = .Front
+//        imagePicker.cameraCaptureMode = .Photo
+//        imagePicker.cameraOverlayView = .None
+        imagePicker.allowsEditing = false
+        if gesture.view?.tag == 0{
+            imgSelected = "top"
+        } else {
+            imgSelected = "bottom"
+        }
+        
+        presentViewController(imagePicker, animated: true, completion: nil)
+        
+    }
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage?{
+            
             if imgSelected == "top"{
                 topImg.image = pickedImage
                 hasChoosenTop = true
@@ -188,19 +262,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    func loadPicker(gesture: UITapGestureRecognizer){
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .PhotoLibrary
-        
-        if gesture.view?.tag == 0{
-            imgSelected = "top"
-        } else {
-            imgSelected = "bottom"
-        }
-        
-        presentViewController(imagePicker, animated: true, completion: nil)
-    }
+
     
 
     func growLines(){
@@ -212,7 +274,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 UIView.animateWithDuration(0.8, animations: {
                     self.rightSmall.transform = CGAffineTransformMakeScale(self.containerView.frame.width/2, self.containerView.frame.height/2)
                 }) {(true) in
-                        UIView.animateWithDuration(0.7, animations: {
+                        UIView.animateWithDuration(0.6, animations: {
                             self.activityIndicatorView.startAnimation()
                             self.activityIndicatorView.alpha = 1
                         }){(true) in
@@ -227,6 +289,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func callSecondAnimation(){
         self.timerDone = true
+        prepForEditVC()
         secondAnimation()
     }
     
@@ -239,7 +302,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.view.addSubview(myWhiteView)
             myWhiteView.center.x = self.view.center.x
             myWhiteView.center.y = self.view.center.y
-
+            print("secondAnim called")
             
             UIView.animateWithDuration(0.7, animations: {
                 self.myWhiteView.transform = CGAffineTransformMakeScale(self.view.frame.width/2, 1)
@@ -262,11 +325,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomImg.image = UIImage(named: bottomAnimal)
         self.topImg.roundCornersForAspectFit(0)
         self.bottomImg.roundCornersForAspectFit(0)
-        myWhiteView.removeFromSuperview()
-
+        if myWhiteView != nil{
+            myWhiteView.removeFromSuperview()
+        }
+        print("reset called")
         timerDone = false
         firstDownloaded = false
         secondDownloaded = false
+    }
+    
+    func prepForEditVC(){
+        print(errorCalledOnceAlready)
+        print("first downloaded \(firstDownloaded)")
+        print("second downloaded \(secondDownloaded)")
+        print("an error\(anErrorTop)")
+        print("bottom error \(anErrorBottom)")
+        if timerDone == true && errorCalledOnceAlready == false && (((firstDownloaded == true || secondDownloaded == true) && (anErrorTop == true || anErrorBottom == true)) || (anErrorTop == true && anErrorBottom == true)){
+            errorCalledOnceAlready = true
+            
+            print("prepForEditVC function")
+            UIView.animateWithDuration(0.5, delay: 0.6, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                self.activityIndicatorView.alpha = 0
+                }) { (true) in
+                    print("inside animate")
+                    self.activityIndicatorView.stopAnimation()
+                    self.resetVC()
+                    self.performSegueWithIdentifier("ErrorVC", sender: self.holdString)
+            }
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -278,11 +364,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
             }
         }
+        if segue.identifier == "ErrorVC"{
+            print("inside segue")
+            if let myErrorVC = segue.destinationViewController as? ErrorVC{
+                if let errorString = sender as? String{
+                    myErrorVC.error = errorString
+                    myErrorVC.dict = dict1
+                }
+            }
+        }
     }
     
-    @IBAction func backBtn(sender: AnyObject){
+    func popBack(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    
+    
+    
+    
+    
     
     
     

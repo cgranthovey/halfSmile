@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class IntroVC: UIViewController {
 
     override func viewDidLoad() {
@@ -18,17 +19,17 @@ class IntroVC: UIViewController {
     
     @IBAction func fullSmileBtn(sender: AnyObject){
         
-        let dict = ["button": "full", "imageTop": "frogClear", "imageBottom": "monkeyClear", "color": ORANGE_COLOR]
+        let dict = ["button": "full", "gameType": "Full-Smile", "gameExplanation": "Closer to 100%", "imageTop": "monkeyBlue", "imageBottom": "frogGreen", "color": ORANGE_COLOR]
         performSegueWithIdentifier("toViewController", sender: dict)
     }
     
     @IBAction func halfSmileBtn(sender: AnyObject){
-        let dict = ["button": "half", "imageTop": "penguin", "imageBottom": "panda", "color": BLUE_COLOR]
+        let dict = ["button": "half", "gameType": "Half-Smile", "gameExplanation": "Closer to 50%", "imageTop": "penguinOrange", "imageBottom": "pandaGreen", "color": BLUE_COLOR]
         performSegueWithIdentifier("toViewController", sender: dict)
     }
     
     @IBAction func zeroSmileBtm(sender: AnyObject){
-        let dict = ["button": "zero", "imageTop": "pandaClear", "imageBottom": "frogZeroClear", "color": GREEN_COLOR]
+        let dict = ["button": "zero", "gameType": "Zero-Smile", "gameExplanation": "Closer to 0%", "imageTop": "pandaOrange", "imageBottom": "frogZeroBlue", "color": GREEN_COLOR]
         performSegueWithIdentifier("toViewController", sender: dict)
     }
     
