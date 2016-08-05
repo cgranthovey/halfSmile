@@ -42,6 +42,7 @@ class ResultVC: UIViewController {
     @IBOutlet weak var gameTypeLbl: UILabel!
     @IBOutlet weak var gameTypeExplanationLbl: UILabel!
     
+    @IBOutlet weak var slimButtonView: UIView!
     
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var topView: UIView!
@@ -89,13 +90,13 @@ class ResultVC: UIViewController {
         do{
             try sfxBoing = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("boing", ofType: "mp3")!))
             sfxBoing.prepareToPlay()
-            sfxBoing.volume = 0.5
+            sfxBoing.volume = 1.0
             try sfxKnife = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("knife", ofType: "mp3")!))
             sfxKnife.prepareToPlay()
-            sfxKnife.volume = 0.5
+            sfxKnife.volume = 0.3
             try sfxSlide = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("slide", ofType: "mp3")!))
             sfxSlide.prepareToPlay()
-            sfxSlide.volume = 0.5
+            sfxSlide.volume = 0.3
         } catch let err as NSError{
             print(err.debugDescription)
         }
@@ -148,6 +149,7 @@ class ResultVC: UIViewController {
             underLineView.backgroundColor = mainColor
             topViewSlim.backgroundColor = mainColor
             bottomViewSlim.backgroundColor = mainColor
+            slimButtonView.backgroundColor = mainColor
         }
         
         if let topLabel = dict["gameType"] as? String{
@@ -192,8 +194,7 @@ class ResultVC: UIViewController {
             setLabels(person2, secondPlace: person1)
         } else{
             setLabels(person1, secondPlace: person2)
-            winnerLbl.text = "Tie"
-            secondPlaceLbl.text = "Tie"
+            tieGame()
         }
     }
     
@@ -204,8 +205,7 @@ class ResultVC: UIViewController {
             setLabels(person2, secondPlace: person1)
         } else {
             setLabels(person1, secondPlace: person2)
-            winnerLbl.text = "Tie"
-            secondPlaceLbl.text = "Tie"
+            tieGame()
 
         }
     }
@@ -219,22 +219,19 @@ class ResultVC: UIViewController {
             setLabels(person2, secondPlace: person1)
         } else{
             setLabels(person1, secondPlace: person2)
-            winnerLbl.text = "Tie"
-            secondPlaceLbl.text = "Tie"
-
+            tieGame()
         }
+    }
+    
+    func tieGame(){
+        winnerLbl.text = "Tie"
+        secondPlaceLbl.text = "Tie"
+        winnerLbl.textColor = UIColor.blackColor()
+        bottomMaterialView.backgroundColor = UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)
     }
 
     func setLabels(winner: Person, secondPlace: Person){
-        
-        if person1.smile != person2.smile{
-            winnerLbl.textColor = UIColor(red: 233.0/255.0, green: 30.0/255.0, blue: 99.0/255.0, alpha: 1.0)
-            bottomMaterialView.backgroundColor = UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 238.0/255.0)
 
-        }
-        
-
-        
         winnerSelfieImg.image = winner.selfieImage
         secondPlaceSelfieImg.image = secondPlace.selfieImage
         print("winnerNumber \(winner.smile)")

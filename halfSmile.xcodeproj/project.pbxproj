@@ -35,6 +35,7 @@
 		A1F72D5A1D305B0000E07E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1F72D581D305B0000E07E9C /* LaunchScreen.storyboard */; };
 		A1F72D651D3063DC00E07E9C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D641D3063DC00E07E9C /* Person.swift */; };
 		A1F72D671D30645700E07E9C /* FaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D661D30645700E07E9C /* FaceService.swift */; };
+		A1F944DE1D5416D8001A95CF /* placementStaningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F944DD1D5416D8001A95CF /* placementStaningsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		A1F72D611D30606100E07E9C /* halfSmile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "halfSmile-Bridging-Header.h"; sourceTree = "<group>"; };
 		A1F72D641D3063DC00E07E9C /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A1F72D661D30645700E07E9C /* FaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceService.swift; sourceTree = "<group>"; };
+		A1F944DD1D5416D8001A95CF /* placementStaningsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placementStaningsView.swift; sourceTree = "<group>"; };
 		B3D84A3533370B28031C86F9 /* Pods_halfSmile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_halfSmile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				A1CB309A1D345643000CF940 /* MaterialView.swift */,
+				A1F944DD1D5416D8001A95CF /* placementStaningsView.swift */,
 				A12768BA1D36D7C300732CDD /* ShadowView.swift */,
 				A1CB309F1D345888000CF940 /* MaterialImage.swift */,
 				A12768B81D36D47700732CDD /* MaterialButton.swift */,
@@ -334,6 +337,7 @@
 				A1B661441D4A7A9700076E0E /* ErrorVC.swift in Sources */,
 				A1CB309B1D345643000CF940 /* MaterialView.swift in Sources */,
 				A17ACC961D47D99300AD9F3B /* IntroVC.swift in Sources */,
+				A1F944DE1D5416D8001A95CF /* placementStaningsView.swift in Sources */,
 				A1320CD81D4FFC99007A1FA7 /* UIImageExtension.swift in Sources */,
 				A1A5569A1D37F9A8002059C0 /* WinnerVC.swift in Sources */,
 				A1F72D521D305B0000E07E9C /* ViewController.swift in Sources */,

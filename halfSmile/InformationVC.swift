@@ -33,10 +33,15 @@ class InformationVC: UIViewController {
         openLink("https://www.freesound.org/")
     }
     
+    @IBAction func freepic(sender: AnyObject){
+        openLink("http://www.freepik.com/free-photos-vectors/background")
+    }
+    
+    
+    
     @IBAction func backButton(sender: AnyObject){
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
     
     
     func popBack(){

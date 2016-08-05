@@ -12,7 +12,10 @@ class MaterialView: UIView {
 
     override func awakeFromNib() {
         layer.cornerRadius = 3.0
+
         clipsToBounds = true
+        
+
     }
     
 }

@@ -33,6 +33,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var battleBtnOutlet: UIButton!
     @IBOutlet weak var slimView: UIView!
     
+    @IBOutlet weak var backgroundImg: UIImageView!
+    
     var hasChoosenTop: Bool!
     var hasChoosenBottom: Bool!
     var imgSelected: String!
@@ -110,10 +112,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var bottomAnimal: String!
     var color: UIColor!
     
+    
+    
     func findImagesAndColor(){
+        
+        if let backGround = dict1["background"] as? String{
+            backgroundImg.image = UIImage(named: backGround)
+        }
+        
         if let topAnimal = dict1["imageTop"] as? String{
             self.topAnimal = topAnimal
             topImg.image = UIImage(named: topAnimal)
+            
         }
         if let bottomAnimal = dict1["imageBottom"] as? String{
             self.bottomAnimal = bottomAnimal
@@ -231,10 +241,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func loadPicker(gesture: UITapGestureRecognizer){
       //  imagePicker.allowsEditing = true
-        imagePicker.sourceType = .PhotoLibrary
-//        imagePicker.cameraDevice = .Front
-//        imagePicker.cameraCaptureMode = .Photo
-//        imagePicker.cameraOverlayView = .None
+        imagePicker.sourceType = .Camera
+        imagePicker.cameraDevice = .Front
+        imagePicker.cameraCaptureMode = .Photo
+        imagePicker.cameraOverlayView = .None
         imagePicker.allowsEditing = false
         if gesture.view?.tag == 0{
             imgSelected = "top"

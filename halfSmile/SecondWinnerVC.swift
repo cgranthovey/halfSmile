@@ -56,7 +56,7 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
         let firstPersonDict = ["person": person1, "img": topImage]
         let secondPersonDict = ["person": person2, "img": topImage]
         NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: firstPersonDict, repeats: false)
-        NSTimer.scheduledTimerWithTimeInterval(3.75, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: secondPersonDict, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(3.95, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: secondPersonDict, repeats: false)
 
     }
     
@@ -73,13 +73,13 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
             print("arnold 2")
             try sfxTick = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("poolBalls", ofType: "mp3")!))
             sfxTick.prepareToPlay()
-            sfxTick.volume = 0.5
+            sfxTick.volume = 0.3
             try sfxWind = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("wind", ofType: "mp3")!))
             sfxWind.prepareToPlay()
-            sfxWind.volume = 0.7
+            sfxWind.volume = 0.5
             try sfxSwing = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("swish", ofType: "mp3")!))
             sfxSwing.prepareToPlay()
-            sfxSwing.volume = 0.1
+            sfxSwing.volume = 0.05
 
             if sfxSwing == nil{
                 print("sfxswing nil")
