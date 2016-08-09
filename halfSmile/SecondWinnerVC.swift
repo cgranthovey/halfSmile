@@ -17,12 +17,8 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
     var dict = [String: AnyObject]()
     
     @IBOutlet weak var topImage: UIImageView!
-//    @IBOutlet weak var bottomImage: UIImageView!
-    
     @IBOutlet weak var shadow: UIView!
-    
     @IBOutlet weak var randomViewForAnimation: UIView!
-    
     
     var person1: Person!
     var person2: Person!
@@ -32,8 +28,6 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
     var sfxWind: AVAudioPlayer!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         parseDict()
         parseFacePointColor()
         shadow.hidden = true
@@ -50,14 +44,10 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         initAudio()
-        
-        
-
         let firstPersonDict = ["person": person1, "img": topImage]
         let secondPersonDict = ["person": person2, "img": topImage]
-        NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: firstPersonDict, repeats: false)
-        NSTimer.scheduledTimerWithTimeInterval(3.95, target: self, selector: #selector(WinnerVC.animateZoom(_:)), userInfo: secondPersonDict, repeats: false)
-
+        NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(SecondWinnerVC.animateZoom(_:)), userInfo: firstPersonDict, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(3.95, target: self, selector: #selector(SecondWinnerVC.animateZoom(_:)), userInfo: secondPersonDict, repeats: false)
     }
     
     var facePointColor: UIColor!
@@ -85,7 +75,6 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
                 print("sfxswing nil")
             }
 
-
         } catch let err as NSError {
             print(err.debugDescription)
         }
@@ -99,7 +88,6 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
         sfxTick.play()
     }
     
-    
     func parseDict(){
         person1 = mySegueDictionary["person1"] as! Person
         person2 = mySegueDictionary["person2"] as! Person
@@ -109,9 +97,7 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
         return CGFloat(degrees * M_PI / 180)
     }
     
-
     func findFace(person: Person, personImageView: UIImageView){
-        var cgImageObject: CGImage!
         let rectFace = CGRectMake(CGFloat(person.faceLeft), CGFloat(person.faceTop), CGFloat(person.faceWidth), CGFloat(person.faceHeight))
         
         print("face left\(person.faceLeft)")
@@ -119,20 +105,11 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
         print("face width \(person.faceWidth)")
         print("face height \(person.faceHeight)")
         
-        
-     
-        cgImageObject = CGImageCreateWithImageInRect(person.selfieImage.CGImage!, rectFace)
-
-
-        var hey = person.selfieImage
-        var yo  = hey.fixOrientation()
-        var yoToCG = yo.CGImage
-        
-        var ai = CGImageCreateWithImageInRect(yoToCG, rectFace)
-        var aiToUI = UIImage(CGImage: ai!)
-        personImageView.image = aiToUI
-        
-
+        let hey = person.selfieImage.fixOrientation()
+        let yoToCG = hey.CGImage
+        let makeToCGImage = CGImageCreateWithImageInRect(yoToCG, rectFace)
+        let makeToUIImage = UIImage(CGImage: makeToCGImage!)
+        personImageView.image = makeToUIImage
         personImageView.roundCornersForAspectFit(5)
     }
     
@@ -145,34 +122,38 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
     }
     
     @objc func animateZoom(timer: NSTimer){
-        
+        print("cat 1")
         var dict = timer.userInfo as? Dictionary<String, AnyObject>
         let person = dict!["person"] as! Person
         let personImageView = dict!["img"] as! UIImageView
-//        let view = dict!["alpha"] as! UIView
-        
+        let original = shadow.center.x
+
         findFace(person, personImageView: personImageView)
-        
+        print("cat 2")
         if topAlphaView1 == nil{
+            print("cat 2.1")
             topAlphaView1 = makeAlphaView(topImage)
         }
         let view = topAlphaView1
-        view.alpha = 0.45
 
-        let original = shadow.center.x
+        print("cat 2.2")
+        view.alpha = 0.45
+        print("cat 2.25")
         shadow.center.x = -shadow.frame.width
+        print("cat 2.3")
         topImage.hidden = false
         shadow.hidden = false
+        print("cat 2.4")
         personImageView.hidden = false
+        print("cat 3")
         for faceDotView in faceDotViews{
             faceDotView.removeFromSuperview()
         }
         
-        
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.5, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.shadow.center.x  = original
             self.sfxWind.play()
-
+print("cat 4")
         }){ (true) in
 //            UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
 //                }, completion: { (true) in
@@ -231,35 +212,30 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
                             })
                     })
 
-        })
-            
-
-            
+                })
         }
     }
 
-    
     var faceDotViews = [UIView]()
-    
     func makeFrameForFacePoints(xPoint: Int, yPoint: Int, person: Person, personImageView: UIImageView){
-        
+
         self.sfxTickFunc()
-        
-        var rect = AVMakeRectWithAspectRatioInsideRect((personImageView.image?.size)!, personImageView.bounds)
+        let rect = AVMakeRectWithAspectRatioInsideRect((personImageView.image?.size)!, personImageView.bounds)
         let imageStartPointX = ((personImageView.frame.size.width) - rect.width) / 2
         let imageStartPointY = ((personImageView.frame.size.height) - rect.height) / 2
         
         let frame1 = CGRectMake(CGFloat(xPoint - person.faceLeft) * rect.width / (personImageView.image?.size.width)! - 3 + imageStartPointX, CGFloat(yPoint - person.faceTop) * rect.height / (personImageView.image?.size.height)! - 3 + imageStartPointY, 6, 6)
+        
         let view = UIView(frame: frame1)
+        view.layer.cornerRadius = 3.0
+        view.clipsToBounds = true
         view.backgroundColor = facePointColor
         faceDotViews.append(view)
         personImageView.addSubview(view)
     }
     
-    
-    
     func makeAlphaView(personImageView: UIImageView) -> UIView {
-        var rect = AVMakeRectWithAspectRatioInsideRect((personImageView.image?.size)!, personImageView.bounds)
+        let rect = AVMakeRectWithAspectRatioInsideRect((personImageView.image?.size)!, personImageView.bounds)
         let imageStartPointX = ((personImageView.frame.size.width) - rect.width) / 2
         let imageStartPointY = ((personImageView.frame.size.height) - rect.height) / 2
         let frame1 = CGRectMake(imageStartPointX, imageStartPointY, rect.width, rect.height)
@@ -282,11 +258,6 @@ class SecondWinnerVC: UIViewController, AVAudioPlayerDelegate {
     }
 
 }
-
-
-
-
-
 
 
 

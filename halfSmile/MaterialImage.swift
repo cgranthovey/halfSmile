@@ -13,7 +13,6 @@ extension UIImageView
     func roundCornersForAspectFit(radius: CGFloat)
     {
         if let image = self.image {
-            
             //calculate drawingRect
             let boundsScale = self.bounds.size.width / self.bounds.size.height
             let imageScale = image.size.width / image.size.height
@@ -37,18 +36,9 @@ extension UIImageView
 
 class MaterialImage: UIImageView {
 
-    override func awakeFromNib() {
-
-    }
-    
     override func drawRect(rect: CGRect) {
         layer.cornerRadius = 3
         clipsToBounds = true
         layer.masksToBounds = true
     }
-    
-    
-    
-    
-    
 }

@@ -9,13 +9,7 @@
 import UIKit
 
 class MaterialButton: UIButton {
-
     
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
     override func awakeFromNib() {
         layer.cornerRadius = 3.0
         clipsToBounds = true
@@ -24,5 +18,4 @@ class MaterialButton: UIButton {
         layer.shadowOpacity = 0.6
         layer.shadowOffset = CGSizeMake(0.0, 0.0)
     }
-
 }

@@ -16,8 +16,10 @@
 		A1320CDB1D50202D007A1FA7 /* metalClick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A1320CDA1D50202D007A1FA7 /* metalClick.mp3 */; };
 		A1320CDD1D502A88007A1FA7 /* InformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1320CDC1D502A88007A1FA7 /* InformationVC.swift */; };
 		A17ACC961D47D99300AD9F3B /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ACC951D47D99300AD9F3B /* IntroVC.swift */; };
-		A1A5569A1D37F9A8002059C0 /* WinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A556991D37F9A8002059C0 /* WinnerVC.swift */; };
-		A1B661421D4991A500076E0E /* IAmTheCrayonMaster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B661411D49903500076E0E /* IAmTheCrayonMaster.ttf */; };
+		A1B5ABC01D552CE400C94B74 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B5ABBF1D552CE400C94B74 /* GoogleMobileAds.framework */; };
+		A1B5ABC21D56911C00C94B74 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABC11D56911C00C94B74 /* Reachability.swift */; };
+		A1B5ABC41D58E58200C94B74 /* HelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABC31D58E58200C94B74 /* HelpVC.swift */; };
+		A1B5ABC61D58EF7A00C94B74 /* MaterialLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B5ABC51D58EF7A00C94B74 /* MaterialLabel.swift */; };
 		A1B661441D4A7A9700076E0E /* ErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B661431D4A7A9700076E0E /* ErrorVC.swift */; };
 		A1CB309B1D345643000CF940 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309A1D345643000CF940 /* MaterialView.swift */; };
 		A1CB309E1D3456B5000CF940 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB309D1D3456B5000CF940 /* Constants.swift */; };
@@ -36,6 +38,7 @@
 		A1F72D651D3063DC00E07E9C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D641D3063DC00E07E9C /* Person.swift */; };
 		A1F72D671D30645700E07E9C /* FaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F72D661D30645700E07E9C /* FaceService.swift */; };
 		A1F944DE1D5416D8001A95CF /* placementStaningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F944DD1D5416D8001A95CF /* placementStaningsView.swift */; };
+		A1F944E01D552838001A95CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1F944DF1D552838001A95CF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,8 +52,10 @@
 		A1320CDA1D50202D007A1FA7 /* metalClick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = metalClick.mp3; sourceTree = "<group>"; };
 		A1320CDC1D502A88007A1FA7 /* InformationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationVC.swift; sourceTree = "<group>"; };
 		A17ACC951D47D99300AD9F3B /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
-		A1A556991D37F9A8002059C0 /* WinnerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerVC.swift; sourceTree = "<group>"; };
-		A1B661411D49903500076E0E /* IAmTheCrayonMaster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IAmTheCrayonMaster.ttf; sourceTree = "<group>"; };
+		A1B5ABBF1D552CE400C94B74 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		A1B5ABC11D56911C00C94B74 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		A1B5ABC31D58E58200C94B74 /* HelpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpVC.swift; sourceTree = "<group>"; };
+		A1B5ABC51D58EF7A00C94B74 /* MaterialLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialLabel.swift; sourceTree = "<group>"; };
 		A1B661431D4A7A9700076E0E /* ErrorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorVC.swift; sourceTree = "<group>"; };
 		A1CB309A1D345643000CF940 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		A1CB309D1D3456B5000CF940 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -72,6 +77,7 @@
 		A1F72D641D3063DC00E07E9C /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A1F72D661D30645700E07E9C /* FaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceService.swift; sourceTree = "<group>"; };
 		A1F944DD1D5416D8001A95CF /* placementStaningsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placementStaningsView.swift; sourceTree = "<group>"; };
+		A1F944DF1D552838001A95CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3D84A3533370B28031C86F9 /* Pods_halfSmile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_halfSmile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B5ABC01D552CE400C94B74 /* GoogleMobileAds.framework in Frameworks */,
 				4BD37444A2DD5C7A4539157D /* Pods_halfSmile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,13 +114,13 @@
 		A10408DA1D39E6C200857222 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A1A556991D37F9A8002059C0 /* WinnerVC.swift */,
+				A17ACC951D47D99300AD9F3B /* IntroVC.swift */,
 				A1F72D511D305B0000E07E9C /* ViewController.swift */,
 				A10408DB1D39E6F600857222 /* SecondWinnerVC.swift */,
 				A10408DD1D3D84F300857222 /* ResultVC.swift */,
-				A17ACC951D47D99300AD9F3B /* IntroVC.swift */,
 				A1B661431D4A7A9700076E0E /* ErrorVC.swift */,
 				A1320CDC1D502A88007A1FA7 /* InformationVC.swift */,
+				A1B5ABC31D58E58200C94B74 /* HelpVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -137,6 +144,7 @@
 			children = (
 				A1F72D641D3063DC00E07E9C /* Person.swift */,
 				A1320CD71D4FFC98007A1FA7 /* UIImageExtension.swift */,
+				A1B5ABC11D56911C00C94B74 /* Reachability.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -149,6 +157,7 @@
 				A12768BA1D36D7C300732CDD /* ShadowView.swift */,
 				A1CB309F1D345888000CF940 /* MaterialImage.swift */,
 				A12768B81D36D47700732CDD /* MaterialButton.swift */,
+				A1B5ABC51D58EF7A00C94B74 /* MaterialLabel.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -156,7 +165,6 @@
 		A1CB309C1D3456A6000CF940 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A1B661411D49903500076E0E /* IAmTheCrayonMaster.ttf */,
 				A1CB309D1D3456B5000CF940 /* Constants.swift */,
 			);
 			name = Utility;
@@ -165,6 +173,7 @@
 		A1F72D431D305AFF00E07E9C = {
 			isa = PBXGroup;
 			children = (
+				A1B5ABBF1D552CE400C94B74 /* GoogleMobileAds.framework */,
 				A1F72D4E1D305B0000E07E9C /* halfSmile */,
 				A1F72D4D1D305B0000E07E9C /* Products */,
 				7434A8FA738ABF9C184BC7EB /* Pods */,
@@ -195,6 +204,7 @@
 				A1F72D5B1D305B0000E07E9C /* Info.plist */,
 				A1F72D611D30606100E07E9C /* halfSmile-Bridging-Header.h */,
 				A1F72D661D30645700E07E9C /* FaceService.swift */,
+				A1F944DF1D552838001A95CF /* GoogleService-Info.plist */,
 			);
 			path = halfSmile;
 			sourceTree = "<group>";
@@ -234,6 +244,7 @@
 				TargetAttributes = {
 					A1F72D4B1D305B0000E07E9C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = APRL9F5T4F;
 					};
 				};
 			};
@@ -265,11 +276,11 @@
 				A1E733121D51427400406F4D /* wind.mp3 in Resources */,
 				A1E733211D526F8400406F4D /* boing.mp3 in Resources */,
 				A1E7331C1D526B6700406F4D /* poolBalls.mp3 in Resources */,
+				A1F944E01D552838001A95CF /* GoogleService-Info.plist in Resources */,
 				A1320CDB1D50202D007A1FA7 /* metalClick.mp3 in Resources */,
 				A1E733201D526F8400406F4D /* knife.mp3 in Resources */,
 				A1F72D5A1D305B0000E07E9C /* LaunchScreen.storyboard in Resources */,
 				A1F72D571D305B0000E07E9C /* Assets.xcassets in Resources */,
-				A1B661421D4991A500076E0E /* IAmTheCrayonMaster.ttf in Resources */,
 				A1F72D551D305B0000E07E9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B5ABC41D58E58200C94B74 /* HelpVC.swift in Sources */,
 				A12768BB1D36D7C300732CDD /* ShadowView.swift in Sources */,
 				A10408DE1D3D84F300857222 /* ResultVC.swift in Sources */,
 				A1F72D671D30645700E07E9C /* FaceService.swift in Sources */,
@@ -339,10 +351,11 @@
 				A17ACC961D47D99300AD9F3B /* IntroVC.swift in Sources */,
 				A1F944DE1D5416D8001A95CF /* placementStaningsView.swift in Sources */,
 				A1320CD81D4FFC99007A1FA7 /* UIImageExtension.swift in Sources */,
-				A1A5569A1D37F9A8002059C0 /* WinnerVC.swift in Sources */,
 				A1F72D521D305B0000E07E9C /* ViewController.swift in Sources */,
+				A1B5ABC61D58EF7A00C94B74 /* MaterialLabel.swift in Sources */,
 				A1CB30A01D345888000CF940 /* MaterialImage.swift in Sources */,
 				A10408DC1D39E6F600857222 /* SecondWinnerVC.swift in Sources */,
+				A1B5ABC21D56911C00C94B74 /* Reachability.swift in Sources */,
 				A1320CDD1D502A88007A1FA7 /* InformationVC.swift in Sources */,
 				A1F72D501D305B0000E07E9C /* AppDelegate.swift in Sources */,
 				A1CB309E1D3456B5000CF940 /* Constants.swift in Sources */,
@@ -462,6 +475,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = halfSmile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrishovey.halfSmile;
@@ -478,6 +496,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = halfSmile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chrishovey.halfSmile;

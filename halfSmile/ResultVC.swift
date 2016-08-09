@@ -57,34 +57,21 @@ class ResultVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-//        topShadow.hidden = true
-//        winnerSelfieImg.hidden = true
         initAudio()
         swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ResultVC.popBack))
         swipeRight.direction = .Right
         view.addGestureRecognizer(swipeRight)
-        
         parseSegueDict()
         parseOverallDict()
-        
-        print("person1: \(person1.smile)")
-        print("person2: \(person2.smile)")
-//        determineWinnerHalf
         whichWinnerFunction()
         animateBeginning()
+        
+        view.clipsToBounds = true
         
         viewForWinnerLbl.delay = 0.0
         viewForWinnerLbl.duration = 0.5
         viewForWinnerLbl.type = CSAnimationTypeShake
-        
-        
-        
-        
     }
-    
-    
     
     func initAudio(){
         do{
@@ -104,14 +91,12 @@ class ResultVC: UIViewController {
     
     var mainColor: UIColor!
     
-    
     func animateBeginning(){
-        var originalTopX = topView.center.x
-        var originalBottomX = bottomView.center.x
+        let originalTopX = topView.center.x
+        let originalBottomX = bottomView.center.x
         
         topView.center.x = -view.frame.width/2
         bottomView.center.x = -view.frame.width/2
-        
         
         UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.topView.center.x = originalTopX
@@ -135,12 +120,8 @@ class ResultVC: UIViewController {
                             }
                         }
                 })
-                
-
         }
     }
-    
-    
     
     func parseOverallDict(){
         if let color = dict["color"] as? UIColor{
@@ -151,19 +132,15 @@ class ResultVC: UIViewController {
             bottomViewSlim.backgroundColor = mainColor
             slimButtonView.backgroundColor = mainColor
         }
-        
         if let topLabel = dict["gameType"] as? String{
             gameTypeLbl.text = topLabel
         }
-        
         if let gameExplanation = dict["gameExplanation"] as? String{
             gameTypeExplanationLbl.text = gameExplanation
         }
-        
     }
 
     func whichWinnerFunction(){
-        
         if let holdButtonType = dict["button"] as? String{
             if holdButtonType == "half"{
                 determineWinnerHalf()
@@ -176,8 +153,6 @@ class ResultVC: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-//        topShadow.hidden = false
-//        winnerSelfieImg.hidden = false
         winnerSelfieImg.roundCornersForAspectFit(5.0)
         secondPlaceSelfieImg.roundCornersForAspectFit(5.0)
     }
@@ -206,7 +181,6 @@ class ResultVC: UIViewController {
         } else {
             setLabels(person1, secondPlace: person2)
             tieGame()
-
         }
     }
     
@@ -227,16 +201,14 @@ class ResultVC: UIViewController {
         winnerLbl.text = "Tie"
         secondPlaceLbl.text = "Tie"
         winnerLbl.textColor = UIColor.blackColor()
-        bottomMaterialView.backgroundColor = UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)
+//        bottomMaterialView.backgroundColor = UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)
     }
 
     func setLabels(winner: Person, secondPlace: Person){
-
         winnerSelfieImg.image = winner.selfieImage
         secondPlaceSelfieImg.image = secondPlace.selfieImage
-        print("winnerNumber \(winner.smile)")
-        var winnerNumber = round(10 * winner.smile * 100) / 10
-        var secondPlaceNumber = round(10 * secondPlace.smile * 100) / 10
+        let winnerNumber = round(10 * winner.smile * 100) / 10
+        let secondPlaceNumber = round(10 * secondPlace.smile * 100) / 10
         print(winnerNumber)
         if winnerNumber == 100{
             winnerPercentageLbl.text = "100%"
@@ -258,15 +230,15 @@ class ResultVC: UIViewController {
         }
     }
     
-    
-    
     @IBAction func playAgainBtn(sender: AnyObject){
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        popBack()
     }
     
     func popBack(){
+        topView.hidden = true
+        topViewSlim.hidden = true
+        bottomView.hidden = true
+        bottomViewSlim.hidden = true
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
-
-    
 }

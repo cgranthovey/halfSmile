@@ -53,7 +53,7 @@ extension UIImage{
         // Now we draw the underlying CGImage into a new context, applying the transform
         // calculated above.
         
-        var ctx = CGBitmapContextCreate(nil, Int(self.size.width), Int(self.size.height), CGImageGetBitsPerComponent(self.CGImage), 0, CGImageGetColorSpace(self.CGImage), CGImageGetBitmapInfo(self.CGImage).rawValue)
+        let ctx = CGBitmapContextCreate(nil, Int(self.size.width), Int(self.size.height), CGImageGetBitsPerComponent(self.CGImage), 0, CGImageGetColorSpace(self.CGImage), CGImageGetBitmapInfo(self.CGImage).rawValue)
         
         CGContextConcatCTM(ctx, transform);
         
@@ -69,8 +69,8 @@ extension UIImage{
         }
         
         // And now we just create a new UIImage from the drawing context
-        var cgimg = CGBitmapContextCreateImage(ctx)
-        var img = UIImage(CGImage: cgimg!)
+        let cgimg = CGBitmapContextCreateImage(ctx)
+        let img = UIImage(CGImage: cgimg!)
         
         return img
     }

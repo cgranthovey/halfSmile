@@ -38,11 +38,9 @@ class InformationVC: UIViewController {
     }
     
     
-    
     @IBAction func backButton(sender: AnyObject){
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
     
     func popBack(){
         self.navigationController?.popViewControllerAnimated(true)
@@ -53,7 +51,4 @@ class InformationVC: UIViewController {
             UIApplication.sharedApplication().openURL(url)
         }
     }
-    
-    
-
 }

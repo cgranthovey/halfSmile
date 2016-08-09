@@ -12,13 +12,8 @@ class placementStaningsView: UIView {
 
     override func awakeFromNib() {
         layer.cornerRadius = 3.0
-        
         layer.borderWidth = 1
         layer.borderColor = UIColor.blackColor().CGColor
-        
         clipsToBounds = true
-        
-        
     }
-
 }

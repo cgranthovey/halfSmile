@@ -44,5 +44,4 @@ class ErrorVC: UIViewController {
     @IBAction func popVC(){
         self.navigationController?.popViewControllerAnimated(true)
     }
-
 }

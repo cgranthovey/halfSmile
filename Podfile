@@ -9,4 +9,6 @@ target 'halfSmile' do
 pod 'ProjectOxfordFace'
 pod 'Canvas', '~> 0.1.2'
 pod 'NVActivityIndicatorView'
+pod 'Firebase'
+
 end

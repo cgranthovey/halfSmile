@@ -12,11 +12,9 @@ import Foundation
 import Canvas
 import AVFoundation
 import NVActivityIndicatorView
+import GoogleMobileAds
 
-
-//icons 
-//panda  Creative Stall, Lucid Formation, sachan, Pranav Grover, Elena Rimeikaite,  Arthur Shlain, Creative Stall, Nick Bluth 
-
+//panda  Creative Stall, Lucid Formation, sachan, Pranav Grover, Elena Rimeikaite,  Arthur Shlain, Creative Stall, Nick Bluth
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -26,14 +24,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomImg: UIImageView!
     
     @IBOutlet weak var viewForButton: CSAnimationView!
+    @IBOutlet weak var topAnimationView: CSAnimationView!
+    @IBOutlet weak var bottomAnimationView: CSAnimationView!
     
     @IBOutlet weak var rightSmall: UIView!
     @IBOutlet weak var containerView: MaterialView!
+    var rightSmallVerticalAdjustment: CGFloat = 27.0
     
     @IBOutlet weak var battleBtnOutlet: UIButton!
     @IBOutlet weak var slimView: UIView!
     
     @IBOutlet weak var backgroundImg: UIImageView!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var hasChoosenTop: Bool!
     var hasChoosenBottom: Bool!
@@ -61,6 +64,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         hasChoosenTop = false
         hasChoosenBottom = false
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"  //testing
+        //bannerView.adUnitID = "ca-app-pub-3796548583790825/4841274796"   // real
+        
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
         
         swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.popBack))
         swipeRight.direction = .Right
@@ -91,10 +100,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         viewForButton.delay = 0
         viewForButton.type = CSAnimationTypePop
         
+        topAnimationView.duration = 0.5
+        topAnimationView.delay = 0
+        topAnimationView.type = CSAnimationTypePop
+        
+        bottomAnimationView.duration = 0.5
+        bottomAnimationView.delay = 0
+        bottomAnimationView.type = CSAnimationTypePop
+        
         findImagesAndColor()
     }
     
     override func viewWillAppear(animated: Bool) {
+        
         battleBtnPressedBoolean = false
         timerDone = false
         firstDownloaded = false
@@ -104,15 +122,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityIndicatorView.alpha = 0
     }
     
+    var adjustRightSmallFrame: CGRect!
     override func viewDidAppear(animated: Bool) {
+        adjustRightSmallFrame = rightSmall.frame
+        print("cat \(adjustRightSmallFrame)")
+        print("cat \(adjustRightSmallFrame.minX)")
+        print("cat \(adjustRightSmallFrame.minY)")
+        print("cat \(adjustRightSmallFrame.width)")
+        print("cat \(adjustRightSmallFrame.height)")
+
+
+
+
+
         errorCalledOnceAlready = false
     }
     
     var topAnimal: String!
     var bottomAnimal: String!
     var color: UIColor!
-    
-    
     
     func findImagesAndColor(){
         
@@ -141,14 +169,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    
-    
- 
-    
-    
     override func viewDidDisappear(animated: Bool) {
         if battleBtnPressedBoolean == true && hasChoosenTop == true && hasChoosenBottom == true{
-            self.rightSmall.transform = CGAffineTransformMakeScale(1, 2/self.containerView.frame.height)
+            self.rightSmall.transform = CGAffineTransformMakeScale(1, 1)
+ //           rightSmall.frame = CGRectMake(0, adjustRightSmallFrame.minY, adjustRightSmallFrame.width, adjustRightSmallFrame.height)
+            print("sea lion \(adjustRightSmallFrame)")
+            print("dog \(rightSmall.frame)")
             hasChoosenTop = false
             hasChoosenBottom = false
         }
@@ -181,6 +207,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             self.anErrorTop = true
                             self.prepForEditVC()
                         }
+                    } else if Reachability.isConnectedToNetwork() == false{
+                        self.holdString = "Connect to internet and try again"
+                        self.anErrorTop = true
+                        self.prepForEditVC()
                     } else{
                         if let holdError = err.localizedFailureReason{
                             self.holdString = holdError
@@ -213,6 +243,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         }
                         
 
+                    } else if Reachability.isConnectedToNetwork() == false{
+                        self.holdString = "Connect to internet and try again"
+                        self.anErrorBottom = true
+                        self.prepForEditVC()
                     } else{
                         if let holdError = err.localizedFailureReason{
                             self.holdString = holdError
@@ -231,7 +265,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    
     func showErrorAlert(){
         let alert =  UIAlertController(title: "Choose images", message: "Tap animal images to take selfie.", preferredStyle: UIAlertControllerStyle.Alert)
         let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -240,20 +273,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func loadPicker(gesture: UITapGestureRecognizer){
+        if gesture.view?.tag == 0{
+            topAnimationView.startCanvasAnimation()
+        } else {
+            bottomAnimationView.startCanvasAnimation()
+        }
+        
+        NSTimer.scheduledTimerWithTimeInterval(0.45, target: self, selector: #selector(ViewController.presentImagePicker(_:)), userInfo: gesture, repeats: false)
       //  imagePicker.allowsEditing = true
+    }
+    
+    func presentImagePicker(timer: NSTimer){
+        let gesture = timer.userInfo as? UITapGestureRecognizer
+        
         imagePicker.sourceType = .Camera
         imagePicker.cameraDevice = .Front
         imagePicker.cameraCaptureMode = .Photo
         imagePicker.cameraOverlayView = .None
         imagePicker.allowsEditing = false
-        if gesture.view?.tag == 0{
+        if gesture!.view?.tag == 0{
             imgSelected = "top"
         } else {
             imgSelected = "bottom"
         }
         
         presentViewController(imagePicker, animated: true, completion: nil)
-        
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -273,27 +317,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
     }
 
-    
-
     func growLines(){
-
         UIView.animateWithDuration(0.8, animations: {
-            self.rightSmall.transform = CGAffineTransformMakeScale(1, self.containerView.frame.height/2)
-
+            self.rightSmall.transform = CGAffineTransformMakeScale(1, self.view.frame.height/2 + self.rightSmallVerticalAdjustment)
             }) { (true) in
                 UIView.animateWithDuration(0.8, animations: {
-                    self.rightSmall.transform = CGAffineTransformMakeScale(self.containerView.frame.width/2, self.containerView.frame.height/2)
+                    self.rightSmall.transform = CGAffineTransformMakeScale(self.containerView.frame.width/2, self.view.frame.height/2 + self.rightSmallVerticalAdjustment)
                 }) {(true) in
                         UIView.animateWithDuration(0.6, animations: {
                             self.activityIndicatorView.startAnimation()
                             self.activityIndicatorView.alpha = 1
                         }){(true) in
-                            var timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: #selector(self.callSecondAnimation), userInfo: nil, repeats: false)
+                            NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: #selector(self.callSecondAnimation), userInfo: nil, repeats: false)
                     } 
                 }
         }
     }
-
     
     var myWhiteView: UIView!
     
@@ -388,16 +427,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func popBack(){
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
