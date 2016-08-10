@@ -65,8 +65,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         hasChoosenTop = false
         hasChoosenBottom = false
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"  //testing
-        //bannerView.adUnitID = "ca-app-pub-3796548583790825/4841274796"   // real
+        //bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"  //testing
+        bannerView.adUnitID = "ca-app-pub-3796548583790825/4841274796"   // real
         
         bannerView.rootViewController = self
         bannerView.loadRequest(GADRequest())
